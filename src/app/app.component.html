@@ -1,20 +1,101 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="app">
+  {{title + '!'}}
 
+  <div>
+    {{ numberOne + numberTwo }}
+  </div>
+  <div>
+    {{ isHappy ? ':D' : ':(' }}
+  </div>
+
+  ----------------------------
+  <h1>Property Binding</h1>
+
+  <div>
+    <h2 [innerHTML]="title"></h2>
+    <img [src]="logo">
+    <input type="text" [value]="name">
+    <div>{{ name }}</div>
+  </div>
+  ----------------------------
+<h1>Event Binding</h1>
+
+  <div>
+    <button (click)="handleClick()">
+      Change name
+    </button>
+    <input type="text"
+      [value]="name"
+      (input) ="handleInput($event)"
+      (blur)="handleBlur($event)">
+  </div>
+  ----------------------------
+
+  <h1>Two-way Binding</h1>
+
+  <div>
+    <button (click)="handleClick()">
+      Change name
+    </button>
+    <input type="text"
+      [ngModel]="name"
+      (ngModelChange) ="handleChange($event)">
+
+    <input type="text"
+      [(ngModel)]="name">
+
+  </div>
+  ----------------------------
+  <h1>Template refs</h1>
+
+  <div>
+    <button (click)="handleClickRefs(username.value)">
+      Get Value
+    </button>
+    <input type="text"
+      >
+    <div>{{ name }}</div>
+  </div>
+  ----------------------------
+  <h1>NgIf</h1>
+
+  <div>
+    <input type="text"
+      [value]="name"
+      (input)="handleChange($event.target.value)">
+    
+    <ng-template [ngIf]="name.length >3">
+      <div>
+        Searching for.. {{ name }}
+      </div>
+    </ng-template>
+
+    <div *ngIf="name.length >3">
+        Searching for.. {{ name }}
+    </div>
+  </div>
+  ----------------------------
+
+
+  <h1>NgFor</h1>
+
+  <div>
+    <h3>Airline Passengers</h3>
+      <ul>
+        <ng-template ngFor let-passenger let-i="index" [ngForOf]="passengers">
+          <li>
+            {{ i }}: {{ passenger.fullname }}
+          </li>
+        </ng-template>
+      </ul>
+      <h3>Airline Passengers</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index;">
+          {{ i }}: {{ passenger.fullname }}
+        </li>
+      </ul>
+  </div>
+  ----------------------------
+
+
+</div>
